@@ -1,0 +1,297 @@
+---
+title: "Instrucciones para configurar un entorno virtual en RStudio enlazado a un proyecto en GitHub"
+format:
+   pdf:
+     documentclass: article
+     classoption: [openright,twoside]
+     fontsize: 11pt
+     include-in-header: _header.tex
+     pdf-engine: pdflatex
+     number-sections: true
+---
+
+En estas notas mostraremos los pasos que debemos seguir para crear y configurar un entorno virtual en RStudio. También mostraremos como instalar y configurar Git, y como enlazarlo con una cuenta de GitHub previamente creada. Finalmente mostraremos como podemos integrar nuestro entorno virtual en RStudio con un proyecto que mantendremos en un repositorio de GitHub.
+
+# Instalación y configuración de RStudio
+
+RStudio es un entorno de desarrollo integrado (IDE, por sus siglas en inglés) diseñado para trabajar con el lenguaje de programación R. En esta sección mostraremos como lo podemos instalar y configurar para luego poderlo utilizar en cualquier proyecto de Ciencia de Datos.
+
+## Instalar R
+
+El primer paso será instalar R. Para esto basta con acceder a la página \href{https://cran.itam.mx/}{https://cran.itam.mx/} para descargar e instalar la versión que corresponde a tu sistema.
+
+\textbf{Nota:} Aunque ya tengamos instalado RStudio, es importante verificar que tenemos la versión más reciente de R. Para comprobar que versión tienes instalada en RStudio, basta con escribir
+
+```{r}
+#| output: false
+
+version
+```
+en la consola de comandos. En la siguiente captura de pantalla se muestra la versión de R que estamos utilizando al momento de escribir estas notas.
+
+\begin{center}
+\includegraphics[height=6cm]{r_version}
+\end{center}
+
+
+## Instalar RStudio
+
+A continuación deberemos de instalar la versión más reciente de RStudio. Para esto basta con acceder a la página \href{https://posit.co/download/rstudio-desktop/}{https://posit.co/download/rstudio-desktop/} para descargar e instalar la versión que corresponde a tu sistema.
+
+## Instalar herramientas adicionales para R
+
+Para el manejo e instalación de ciertos paquetes de R, es necesario instalar algunas herramientas adicionales. El procedimiento a seguir en este caso depende de nuestro sistema:
+
+\textbf{Windows:} Accede a la página \href{https://cran.r-project.org/bin/windows/Rtools/}{https://cran.r-project.org/bin/windows/Rtools/} para descargar e instalar "RTools". Es importante descargar la versión que corresponde a la versión de R que tienes instalada en tu sistema.
+  
+\textbf{MacOS:} Escribe
+```{r}
+#| eval: false
+  
+xcode-select --install
+```
+en tu terminal para instalar las herramientas fundamentales de desarrollo para tu Mac.
+
+# Instalación y configuración de GitHub Desktop
+
+Git es un sistema de control de versiones que te ayuda a llevar un registro de los cambios en tu código y a colaborar con otras personas. En lugar de guardar muchas copias de un mismo proyecto, Git almacena el historial de modificaciones, de modo que siempre puedes regresar a una versión anterior si algo sale mal. También permite que varias personas trabajen al mismo tiempo en el mismo proyecto, combinando sus aportaciones de manera ordenada. En Ciencia de Datos, Git es fundamental para organizar proyectos, asegurar la reproducibilidad y trabajar de forma eficiente en equipo.
+
+En esta sección mostraremos como podemos instalar y configurar Git para después enlazarlo con una cuenta de GitHub utilizando la aplicación "GitHub Desktop".
+
+## Crear una cuenta en GitHub
+
+Si aún no lo has hecho, accede a la página \href{https://github.com/}{https://github.com/} y crea una cuenta personal. Se recomienda que utilices tu correo institucional para gestionar esta cuenta.
+
+## Instalar Git
+
+A continuación deberemos instalar Git en tu computadora. La mejor manera de hacerlo depende del sistema que estés utilizando.
+
+\textbf{Windows:} Accede a la página \href{https://git-scm.com/downloads/win}{https://git-scm.com/downloads/win} para descargar e instalar Git. Asegúrate de seguir todas las instrucciones incluídas en el instalador.
+
+\textbf{MacOs:} Si escribiste
+```{r}
+#| eval: false
+  
+xcode-select --install
+```
+en tu terminal en el paso anterior, entonces ya deberías de tener Git instalado en tu sistema. Para comprobarlo, basta con escribir
+```{r}
+#| eval: false
+  
+git --version
+```
+para ver la versión de Git que tienes disponible.
+
+## Instalar GitHub Desktop
+
+Accede a la página \href{https://desktop.github.com/download/}{https://desktop.github.com/download/} para descargar e instalar GitHub Desktop en tu computadora. Durante el proceso de instalación, el sistema te pedirá que enlaces esta aplicación a la cuenta de GitHub que ya habías creado anteriormente.
+
+# Clonación y enlace de un proyecto de GitHub
+
+Ya con estas herramientas a nuestra disposición, procederemos ahora a clonar y configurar el proyecto de GitHub que deberás de utilizar para tu reto. Para esto es importante que generes una carpeta en tu computadora en la cual estarás almacenando todos tus proyectos que utilicen R.
+
+## Clonar el proyecto
+
+Utilizando GitHub Desktop, clona el proyecto \href{https://github.com/Krul-dev/MA1001B}{https://github.com/Krul-dev/MA1001B} como se muestra en las siguientes capturas de pantalla.
+
+\begin{center}
+\includegraphics[height=6cm]{clone_repository}
+\end{center}
+
+\begin{center}
+\includegraphics[height=6cm]{clone_ma1001b}
+\end{center}
+
+Verifica que el proyecto se haya clonado de manera correcta en tu carpeta local.
+
+## Crear un repositorio vacío en GitHub
+
+Accede ahora a tu página principal de GitHub \href{https://github.com/}{https://github.com/} y genera un nuevo repositorio vacío. Asegúrate de que el repositorio sea público, pero que no incluya los archivos "README", ".gitignore" ni licencia, como se muestra en las siguientes capturas de pantalla.
+
+\begin{center}
+\includegraphics[height=6cm]{new_repository}
+\end{center}
+
+\begin{center}
+\includegraphics[height=6cm]{blank_repository}
+\end{center}
+
+\begin{center}
+\includegraphics[height=6cm]{success_repository}
+\end{center}
+
+## Enlazar el repositorio vacío con el proyecto clonado
+
+Queremos ahora enlazar este nuevo repositorio que creaste en el paso anterior con el proyecto que clonamos usando GitHub Desktop. Para esto debemos de cambiar el repositorio remoto asociado a nuestro proyecto local, como se muestra en las siguientes capturas de pantalla.
+
+\begin{center}
+\includegraphics[height=6cm]{settings_repository}
+\end{center}
+
+\begin{center}
+\includegraphics[height=6cm]{remote_repository}
+\end{center}
+
+Ya que nuestros repositorios están enlazados de esta manera, podemos "empujar" (push) todos los archivos de nuestro proyecto local a nuestro repositorio remoto, como podemos ver en las siguientes capturas de pantalla.
+
+\begin{center}
+\includegraphics[height=6cm]{push_repository}
+\end{center}
+
+\begin{center}
+\includegraphics[height=6cm]{synced_repository}
+\end{center}
+
+## Manejo de acceso al repositorio
+
+Para este proyecto es importante que elijan a un miembro de su equipo que manejará el repositorio base y que esta persona agregue al resto de sus compañeros como colaboradores. Esto se logra accediendo a su repositorio en Github y seleccionando "Settings", "Collaborators", "Add people" como se muestra en la siguiente captura de pantalla.
+
+\begin{center}
+\includegraphics[height=6cm]{add_people}
+\end{center}
+
+Esto abrirá una nueva pestaña en la cual deberán buscar a sus compañeros utilizando su nombre de usuario y los deberán de agregar como colaboradores dando click in "Add to repository".
+
+\begin{center}
+\includegraphics[height=6cm]{add_teammate}
+\end{center}
+
+# Integración con RStudio
+
+El proyecto de R, que ya tenemos en nuestros repositorios local y remoto, utiliza un entorno virtual para administrar los paquetes requeridos y otras dependencias. A continuación mostraremos como podemos utilizar RStudio para administrar este entorno virtual.
+
+## Crear un proyecto en RStudio
+
+Primero deberemos crear un nuevo proyecto en RStudio asociado a nuestro repositorio local, como se muestra en las siguientes capturas de pantalla:
+
+\begin{center}
+\includegraphics[height=6cm]{new_project}
+\end{center}
+
+\begin{center}
+\includegraphics[height=6cm]{existing_directory}
+\end{center}
+
+\begin{center}
+\includegraphics[height=6cm]{create_project}
+\end{center}
+
+## Reconstruir el entorno virtual
+
+Ahora debemos reconstruir el entorno virtual asociado a este proyecto en nuestro repositorio local. Si introducimos el comando
+```{r}
+#| eval: false
+
+renv::status()
+```
+en nuestra consola de RStudio, entonces podremos ver todas las dependencias requeridas y que todavía no se encuentran instaladas en nuestro proyecto.
+\begin{center}
+\includegraphics[height=6cm]{renv_status}
+\end{center}
+
+Para reconstruir el entorno que necesitamos debemos de ingresar el siguiente comando en la consola
+```{r}
+#| eval: false
+
+renv::restore()
+```
+El sistema nos pedirá entonces autorizar la instalación de los paquetes requeridos, una vez que este proceso haya concluído nuestro entorno ya debería de estar listo para empezar a trabajar.
+\begin{center}
+\includegraphics[height=6cm]{renv_restore}
+\end{center}
+
+
+Para comprobarlo, compilaremos el archivo "quarto/reports/etapa1.qmd" que se encuentra en nuestro proyecto local
+
+\begin{center}
+\includegraphics[height=6cm]{etapa1}
+\end{center}
+
+## Manejo del entorno virtual
+
+Para ilustrar como manejar este entorno, agreguemos el siguiente código en un chunk de R dentro de nuestro archivo "quarto/reports/etapa1.qmd"
+```{r}
+#| eval: false
+
+library(maps)
+map("world")
+```
+
+\begin{center}
+\includegraphics[height=6cm]{maps}
+\end{center}
+
+
+Con esta modificación el archivo no compilará, ya que le hará falta la librería "maps". Para agregarla, debemos introducir el comando
+```{r}
+#| eval: false
+
+renv::install("maps")
+```
+en nuestra consola de RStudio y autorizar su instalación.
+
+\begin{center}
+\includegraphics[height=6cm]{install_maps}
+\end{center}
+
+Para registrar esta nueva librería como dependencia, deberemos ahora de introducir el comando
+
+```{r}
+#| eval: false
+
+renv::snapshot()
+```
+
+\begin{center}
+\includegraphics[height=6cm]{snapshot}
+\end{center}
+
+Esto asegura que nuestro entorno virtual se encuentra sincronizado. Para compartirlo con el resto de tus compañeros, debes ahora dar click en la pestaña "Git" en RStudio, seleccionar todos los archivos que se muestran y dar click en "Commit". 
+
+\begin{center}
+\includegraphics[height=6cm]{staged}
+\end{center}
+
+Esto abrirá una nueva ventana en la cual deberás escribir un mensaje que describa los cambios que le hiciste al proyecto. Se recomienda que este mensaje sea relativamente breve pero que claramente indique las modificaciones hechas.
+
+\begin{center}
+\includegraphics[height=6cm]{commit}
+\end{center}
+
+Finalmente, deberemos de dar click en la opción de "push" para enviar nuestros cambios al repositorio remoto.
+
+\begin{center}
+\includegraphics[height=6cm]{push}
+\end{center}
+
+Una vez hecho esto, el resto de tus compañeros deberán de dar click en la opción "pull" para que los cambios hechos se reflejen en su entorno local. 
+
+\begin{center}
+\includegraphics[height=6cm]{pull}
+\end{center}
+
+Sin embargo las nuevas dependencias requeridas no han sido instaladas todavía, por lo que su entorno se encuentra desincronizado. Esto se puede verificar ingresando el comando
+```{r}
+#| eval: false
+
+renv::status()
+```
+en nuestra consola de RStudio. 
+
+\begin{center}
+\includegraphics[height=6cm]{maps_missing}
+\end{center}
+
+Para instalar las dependencias faltantes, basta con ingresar el comando
+```{r}
+#| eval: false
+
+renv::restore()
+```
+y aprovar la instalación de los paquetes indicados.
+
+\begin{center}
+\includegraphics[height=6cm]{maps_installed}
+\end{center}
+
+De esta manera todos los miembros de su equipo mantendrán un ambiente virtual sincronizado, aunque se encuentren trabajando en arquitecturas distintas.
